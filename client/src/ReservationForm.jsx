@@ -41,10 +41,13 @@ function ReservationForm() {
         roomId: roomId, // Use the _id of the selected room
       });
       console.log(response.data);
+  
+      // Refresh the page after a successful reservation creation
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
-  };  
+  };    
 
   return (
     <div className="w-full max-w-md mx-auto">
