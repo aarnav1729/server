@@ -108,5 +108,20 @@ router.get('/rooms', async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   });  
-
+  
+// Delete a reservation
+router.delete('/:reservationId', async (req, res) => {
+    const { reservationId } = req.params;
+    try {
+      // Update the reservation status to 'completed'
+      await Reservation.findByIdAndUpdate(reservationId, { status: 'completed' });
+      // Delete the reservation from the database (if needed)
+      // await Reservation.findByIdAndDelete(reservationId);
+      res.status(200).json({ message: 'Reservation deleted successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
 module.exports = router;

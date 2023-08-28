@@ -62,6 +62,18 @@ function ReservationList() {
       console.error(error);
     }
   };
+
+  const handleDeleteReservation = async (reservationId) => {
+    try {
+      // Send a request to delete the reservation
+      await axios.delete(`/reservations/${reservationId}`);
+      console.log(`Reservation with ID ${reservationId} deleted.`);
+      // Refresh the reservation list after a successful delete
+      fetchReservations();
+    } catch (error) {
+      console.error(error);
+    }
+  };  
   
   return (
     <div>
@@ -96,14 +108,27 @@ function ReservationList() {
                     </button>
                 )}
                 {reservation.status === 'checkedIn' && (
+                    <>
                     <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded-full"
-                    onClick={() => handleCheckOut(reservation._id)}
+                        className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded-full"
+                        onClick={() => handleCheckOut(reservation._id)}
                     >
-                    Check-Out
+                        Check-Out
                     </button>
+                    </>
+                )}
+                {reservation.status === 'checkedOut' && (
+                    <>
+                    <button
+                        className="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded-full"
+                        onClick={() => handleDeleteReservation(reservation._id)}
+                    >
+                        Delete
+                    </button>
+                    </>
                 )}
                 </td>
+
               </tr>
             ))}
           </tbody>
