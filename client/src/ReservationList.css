@@ -1,0 +1,41 @@
+/* Add space between table columns and center the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Prevent table from expanding beyond its container */
+  }
+  
+  h2 {
+    margin-bottom: 1rem; /* Add space below the heading */
+    text-align: center;
+    justify-content: center;
+    align-self: center;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    word-wrap: break-word; /* Break long text to fit the cell */
+  }
+  
+  /* Style the table header */
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    table {
+      font-size: 14px; /* Reduce font size for smaller screens */
+    }
+  
+    th, td {
+      padding: 6px; /* Reduce padding for smaller screens */
+    }
+  
+  
+    /* Center the table on small screens */
+    table {
+      margin: 0 auto;
+    }
+  }
