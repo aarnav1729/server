@@ -108,7 +108,7 @@ router.get('/rooms', async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   });  
-  
+
 // Delete a reservation
 router.delete('/:reservationId', async (req, res) => {
     const { reservationId } = req.params;
@@ -123,5 +123,18 @@ router.delete('/:reservationId', async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   });
+
+// Add a new PUT route to update the reservation status to "completed"
+router.put('/mark-as-completed/:reservationId', async (req, res) => {
+    const { reservationId } = req.params;
+    try {
+      await Reservation.findByIdAndUpdate(reservationId, { status: 'completed' });
+      res.status(200).json({ message: 'Reservation marked as completed' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
   
 module.exports = router;

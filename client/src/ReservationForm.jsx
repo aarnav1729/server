@@ -47,7 +47,7 @@ function ReservationForm() {
     } catch (error) {
       console.error(error);
     }
-  };    
+  };
 
   return (
     <div className="w-full max-w-md mx-auto">
