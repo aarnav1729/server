@@ -74,7 +74,14 @@ function ReservationList() {
       console.error(error);
     }
   };  
-  
+
+  // Create two arrays for completed and non-completed reservations
+  const completedReservations = reservations.filter((reservation) => reservation.status === 'completed');
+  const nonCompletedReservations = reservations.filter((reservation) => reservation.status !== 'completed');
+
+  // Concatenate the arrays to display completed reservations at the bottom
+  const allReservations = [...nonCompletedReservations, ...completedReservations];
+
   return (
     <div>
       <h2 className="text-2xl font-semibold mb-4">Reservation List</h2>
@@ -91,7 +98,7 @@ function ReservationList() {
             </tr>
           </thead>
           <tbody>
-            {reservations.map((reservation) => (
+            {allReservations.map((reservation) => (
               <tr key={reservation._id}>
                 <td className="border border-gray-300 p-2">{reservation.guestName}</td>
                 <td className="border border-gray-300 p-2">{getRoomStatus(reservation.roomId)}</td>
@@ -99,36 +106,35 @@ function ReservationList() {
                 <td className="border border-gray-300 p-2">{formatDate(reservation.checkOutDate)}</td>
                 <td className="border border-gray-300 p-2">{reservation.status}</td>
                 <td className="border-b border-gray-300 py-2">
-                {reservation.status === 'pending' && (
+                  {reservation.status === 'pending' && (
                     <button
-                    className="bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded-full"
-                    onClick={() => handleCheckIn(reservation._id)}
+                      className="bg-green-500 hover:bg-green-700 text-white py-1 px-2 rounded-full"
+                      onClick={() => handleCheckIn(reservation._id)}
                     >
-                    Check-In
+                      Check-In
                     </button>
-                )}
-                {reservation.status === 'checkedIn' && (
+                  )}
+                  {reservation.status === 'checkedIn' && (
                     <>
-                    <button
+                      <button
                         className="bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded-full"
                         onClick={() => handleCheckOut(reservation._id)}
-                    >
+                      >
                         Check-Out
-                    </button>
+                      </button>
                     </>
-                )}
-                {reservation.status === 'checkedOut' && (
+                  )}
+                  {reservation.status === 'checkedOut' && (
                     <>
-                    <button
+                      <button
                         className="bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded-full"
                         onClick={() => handleDeleteReservation(reservation._id)}
-                    >
+                      >
                         Delete
-                    </button>
+                      </button>
                     </>
-                )}
+                  )}
                 </td>
-
               </tr>
             ))}
           </tbody>
