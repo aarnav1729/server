@@ -1,29 +1,17 @@
 const mongoose = require('mongoose');
 
 const reservationSchema = new mongoose.Schema({
-  guestName: {
-    type: String,
-    required: true,
-  },
-  checkInDate: {
-    type: Date,
-    required: true,
-  },
-  checkOutDate: {
-    type: Date,
-    required: true,
-  },
+  guestName: String,
+  checkInDate: Date,
+  checkOutDate: Date,
   roomId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Room', // Reference to the Room model
+    ref: 'Room',
   },
-  checkedIn: {
-    type: Boolean,
-    default: false, // Initially, the reservation is not checked in
-  },
-  checkedOut: {
-    type: Boolean,
-    default: false, // Initially, the reservation is not checked out
+  status: {
+    type: String,
+    enum: ['pending', 'checkedIn', 'checkedOut'],
+    default: 'pending',
   },
 });
 

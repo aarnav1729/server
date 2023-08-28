@@ -72,29 +72,30 @@ router.get('/list', async (req, res) => {
     }
 });
 
+
+// Check-in a reservation
 router.put('/check-in/:reservationId', async (req, res) => {
     const { reservationId } = req.params;
     try {
-      // Update the reservation's check-in status
-      await Reservation.findByIdAndUpdate(reservationId, { checkedIn: true });
+      await Reservation.findByIdAndUpdate(reservationId, { status: 'checkedIn' });
       res.status(200).json({ message: 'Check-in successful' });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Internal server error' });
     }
-});
-
-router.put('/check-out/:reservationId', async (req, res) => {
+  });
+  
+  // Check-out a reservation
+  router.put('/check-out/:reservationId', async (req, res) => {
     const { reservationId } = req.params;
     try {
-      // Update the reservation's check-out status
-      await Reservation.findByIdAndUpdate(reservationId, { checkedOut: true });
+      await Reservation.findByIdAndUpdate(reservationId, { status: 'checkedOut' });
       res.status(200).json({ message: 'Check-out successful' });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'Internal server error' });
     }
-});
+  });
 
 // Define a route to retrieve and list rooms
 router.get('/rooms', async (req, res) => {
