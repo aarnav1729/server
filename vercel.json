@@ -1,8 +1,0 @@
-{
-    "routes": [
-      {
-        "src": "/reservations/available-rooms",
-        "dest": "/reservations/available-rooms"
-      }
-    ]
-  }  

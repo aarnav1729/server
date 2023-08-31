@@ -1,7 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const cors = require('cors');
 const Reservation = require('../models/Reservation'); // We'll create this model in the next step
 const Room = require('../models/Room'); // Import your Room model
+
+//Enable CORS
+router.use(cors());
 
 // Create a new reservation
 router.post('/create', async (req, res) => {
@@ -136,5 +140,4 @@ router.put('/mark-as-completed/:reservationId', async (req, res) => {
     }
   });
   
-
 module.exports = router;
